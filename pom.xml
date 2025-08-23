@@ -15,7 +15,7 @@
 	<artifactId>weblap</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Weblap</name>
-	<description>Spring Boot Thymeleaf projekt security nélkül, auto reloaddal</description>
+	<description>Spring Boot </description>
 
 	<properties>
 		<java.version>21</java.version>
