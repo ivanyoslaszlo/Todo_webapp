@@ -19,8 +19,12 @@ public class Register {
 
     @PostMapping("/register")
 
-    public String registerUser(@RequestBody Users user) throws SQLException {
-
+    public String registerUser(@RequestBody Users user) {
+        if (user.getUsername() == null || user.getUsername().trim().isEmpty() ||
+                user.getEmail() == null || user.getEmail().trim().isEmpty() ||
+                user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+            return "Hiba: minden mező kitöltése kötelező!";
+        }
         String url = "jdbc:sqlite:user.datas.db";
         String comand = "select password,username,email from users where username=?";
 
@@ -33,6 +37,8 @@ public class Register {
             if (rs.next()) {
                 return "Hiba ez a felhasználó név már foglalt!";
             }
+        } catch (SQLException e) {
+            System.out.println(e);
         }
 
         user.setPassword(encoder.encode(user.getPassword()));
@@ -52,6 +58,8 @@ public class Register {
             
             ps.setString(4, formatted_date);
             ps.executeUpdate();
+        }catch (SQLException e){
+            System.out.println(e);
         }
 
 
