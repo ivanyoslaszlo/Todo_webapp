@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 
 @RestController
-@CrossOrigin(origins = "*")
+
 public class Register {
 
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
