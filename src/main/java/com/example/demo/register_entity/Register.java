@@ -59,7 +59,9 @@ public class Register {
             ps.setString(4, formatted_date);
             ps.executeUpdate();
         }catch (SQLException e){
+
             System.out.println(e);
+            throw new RuntimeException(e);
         }
 
 

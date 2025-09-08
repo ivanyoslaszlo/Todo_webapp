@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.sql.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 @Controller
 public class HomePageController {
@@ -22,6 +24,15 @@ public class HomePageController {
 
     @PostMapping("/kilepes")
     public String logout(HttpSession session) {
+
+        LocalDateTime belepes_ideje = (LocalDateTime) session.getAttribute("login_time");
+        LocalDateTime kilepes_ideje = LocalDateTime.now().withNano(0);
+        Duration munkamenet = Duration.between(belepes_ideje, kilepes_ideje);
+        long hour = munkamenet.toHours();
+        long minutes = munkamenet.toMinutes() % 60;
+        long seconds = munkamenet.toSeconds() % 60;
+
+        System.out.println(session.getAttribute("user") + " Kilépett: " + kilepes_ideje + " || " + "Munkamenet hossza: " + hour + " óra " + minutes + " perc " + seconds + " másodperc");
         session.invalidate();
         return "loginpage";
     }

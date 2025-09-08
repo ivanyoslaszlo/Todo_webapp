@@ -69,8 +69,10 @@ public class LoginController {
                 if (encoder.matches(password, dbpassword)) {
 
                     session.setAttribute("user", username);
+                    session.setAttribute("login_time",LocalDateTime.now().withNano(0));
                     Object userobj = session.getAttribute("user");
-                    System.out.println("Bejelentkezett: " + userobj);
+                    Object ido=session.getAttribute("login_time");
+                    System.out.println("Bejelentkezett: " + userobj+" "+ido);
                     if (userobj != null) {
                         last_logged_in(connection,userobj.toString());
                         return "redirect:/todo";
