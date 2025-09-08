@@ -1,4 +1,4 @@
-package com.example.demo.register_entity;
+package com.example.demo.entitys;
 
 public class Users {
 

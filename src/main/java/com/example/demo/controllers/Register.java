@@ -1,5 +1,6 @@
-package com.example.demo.register_entity;
+package com.example.demo.controllers;
 
+import com.example.demo.entitys.Users;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.web.bind.annotation.*;
@@ -7,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 
 @RestController
