@@ -1,6 +1,7 @@
 package com.example.demo.respository;
 
 import com.example.demo.entities.Users;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +13,11 @@ import java.time.format.DateTimeFormatter;
 @Repository
 public class repository {
 
+    private final String url = "jdbc:sqlite:user.datas.db";
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public boolean check_username(String username) {
-        String url = "jdbc:sqlite:user.datas.db";
+
         String comand = "select password,username,email from users where username=?";
 
         try (
@@ -34,7 +37,7 @@ public class repository {
 
     public void save(Users user) {
 
-        String url = "jdbc:sqlite:user.datas.db";
+
         String insertsql = "insert into users(username,email,password,registered_at) values(?,?,?,?)";
 
         try (Connection connection = DriverManager.getConnection(url);
@@ -58,6 +61,10 @@ public class repository {
         }
 
 
+    }
+
+    public boolean check_password(String rawPassword, String encoded_password) {
+        return encoder.matches(rawPassword,encoded_password);
     }
 
 }
