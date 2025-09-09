@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.respository.repository;
 import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,13 +14,6 @@ import java.time.format.DateTimeFormatter;
 
 @Controller
 public class LoginController {
-
-    private final repository userRespository;
-
-    public LoginController(repository userRespository) {
-        this.userRespository = userRespository;
-    }
-
 
     String url = "jdbc:sqlite:user.datas.db";
 
@@ -71,10 +63,10 @@ public class LoginController {
             if (rs.next()) {
 
                 String dbusername = rs.getString("username");
-                String encoded_password = rs.getString("password");
+                String dbpassword = rs.getString("password");
 
 
-                if (userRespository.check_password(password,encoded_password)) {
+                if (encoder.matches(password, dbpassword)) {
 
                     session.setAttribute("user", username);
                     session.setAttribute("login_time",LocalDateTime.now().withNano(0));
