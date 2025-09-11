@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import com.example.demo.respository.repository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,41 +8,30 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "*")
+
 @RestController
-public class NoteConroller {
+public class NoteController {
+
+    private final repository userRespository;
+
+    public NoteController(repository userRespository) {
+        this.userRespository = userRespository;
+    }
 
 
     @PostMapping("/note")
     public String createNote(@RequestBody String szoveg, HttpSession session) {
+
         System.out.println("Beérkezett szöveg: " + szoveg);
-
-        String url = "jdbc:sqlite:user.datas.db";
-        String comand = "insert into notes (username,content)  values (?,?)";
         String username = (String) session.getAttribute("user");
-        try (
-                Connection connection = DriverManager.getConnection(url);
-                PreparedStatement preparedStatement = connection.prepareStatement(comand)
 
-
-        ) {
-            preparedStatement.setString(1, username);
-            preparedStatement.setString(2, szoveg);
-            int rows = preparedStatement.executeUpdate();
-            if (rows > 0) {
-                  System.out.println("sikeres beszurás");
-            } else {
-                System.out.println("hiba a beszurás közben");
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if (username == null) {
+            return "Be kell jelentkezni!";
         }
 
-
-        return "A jegyzet sikeresen elküldve!";
+        userRespository.createNote(username, szoveg);
+        return "Jegyzet sikeresen elküldve";
     }
-
 
     @GetMapping("/note")
     public List<String> getNotes(HttpSession session) {
@@ -84,7 +74,7 @@ public class NoteConroller {
                 }
             }
             if (totalDeleted > 0) {
-                System.out.println("Sikeresen törölve: "+totalDeleted);
+                System.out.println("Sikeresen törölve: " + totalDeleted);
             } else {
                 System.out.println("Nem történt törlés");
             }

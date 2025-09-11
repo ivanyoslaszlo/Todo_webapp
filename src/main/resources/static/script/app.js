@@ -36,8 +36,12 @@ async function jegyzetmentes() {
             body: noteText
         });
 
-        await response.text();
+        const message=await response.text();
         jegyzet_listahoz_adas(noteText);
+
+        const now=Date().toLocaleString();
+        console.log(message+" : "+noteText+" . "+now)
+
 
         document.getElementById("feladat").value = ""; 
     } catch (error) {
