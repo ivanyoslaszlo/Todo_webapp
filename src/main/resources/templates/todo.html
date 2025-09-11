@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="hu" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>To-Do</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+    <h1>Új feladat:</h1>
+
+    <!-- input + mentés egy sorban -->
+    <div class="input-group">
+        <input type="text" id="feladat" name="feladat" placeholder="Írd be a feladatot..." />
+        <input type="button" value="Mentés" id="bekuldes" />
+    </div>
+
+    <!-- törlés és összes kész alatta -->
+    <div class="button-group">
+         <button id="selectAll">Összes kész</button>
+        <button id="delete">Kijelöltek törlése</button>
+       
+    </div>
+
+    <!-- lista -->
+    <ul id="jegyzetlista"></ul>
+
+    <!-- kilépés legalul -->
+    <form method="POST" action="/kilepes" class="logout-group">
+        <input type="submit" value="Kilépés" id="logout" />
+    </form>
+
+    <script th:src="@{/script/app.js}"></script>
+</body>
+
+</html>
