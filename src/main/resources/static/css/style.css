@@ -1,26 +1,28 @@
-
-
 body {
     text-align: center;
-    margin-top: 100px;
     font-family: 'Segoe UI', Arial, sans-serif;
     background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); /* sötétkék-lila */
     min-height: 100vh;
-    margin: 150px;
+    margin: 60px 20px;
     color: #f5f5f5;
-    background-image: url("hatter.jpg");
-    background-size: cover;  
-       background-position: center;
-        background-attachment: fixed;
 }
 
+/* Input + gomb egy sorban */
+.input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
 
-
-
-#feladat-mezo{
-    width: 340px;
+/* Input mező */
+#feladat {
+    flex: 1;
+    min-width: 150px;
+    max-width: 400px;
     height: 44px;
-    font-size: 16px;
+    font-size: 20px;
     padding: 0 12px;
     border: 1px solid #9d4edd;
     border-radius: 6px;
@@ -28,169 +30,124 @@ body {
     background-color: #1e1e2f;
     color: #fff;
     transition: border 0.3s, box-shadow 0.3s;
-    border-radius: 30px;
-    
 }
-#feladat-mezo:focus {
+
+#feladat:focus {
     border-color: #c77dff;
-    box-shadow: 0 0 10px rgba(199, 125, 255, 0.8);
+    box-shadow: 0 0 8px rgba(199, 125, 255, 0.7);
 }
 
-.button-row {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    align-items: center; /* <<< ez a fontos */
-    margin-top: 10px;
-}
-
-.torles-gomb {
-    background: transparent;
-    border: none;
-    color: #9d4edd;   /* alap lila */
-    font-size: 18px;
+/* Checkbox */
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
     cursor: pointer;
-    transition: color 0.3s, transform 0.2s;
-    padding: 6px;
-    border-radius: 50%;
+    accent-color: #9d4edd; /* lila */
 }
 
-.torles-gomb i {
-    color: inherit;   /* ikon örökli a gomb színét */
-}
-
-.torles-gomb:hover {
-    color: #c77dff;   /* világosabb lila hover */
-    transform: scale(1.2);
-}
-
-.torles-gomb:active {
-    transform: scale(0.9);
-}
-
-#bekuldes-gomb,
-#kilepes-gomb{
+/* Gombok */
+#bekuldes,
+#delete,
+#logout,
+#selectAll {
     height: 44px;
     font-size: 15px;
-    padding: 0 22px;
-    border-radius: 30px;
+    padding: 0 20px;
+    border-radius: 8px;
     border: none;
     background: linear-gradient(135deg, #9d4edd, #6a00f4);
     color: #fff;
     cursor: pointer;
-    margin: 10px 5px;
+    margin: 8px 5px;
     transition: background 0.3s, transform 0.2s;
     font-weight: 600;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-
-
-#bekuldes-gomb:hover,
-#torles-gomb:hover,
-#kilepes-gomb:hover{
+/* Mentés gomb hangsúlyosabb */
+#bekuldes {
+    width: 110px;
+    height: 48px;
+    font-size: 16px;
     background: linear-gradient(135deg, #c77dff, #9d4edd);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5);
+}
+
+#bekuldes:hover,
+#delete:hover,
+#logout:hover,
+#selectAll:hover {
+    background: linear-gradient(135deg, #e0aaff, #c77dff);
     transform: scale(1.06);
 }
 
-
-
-
-
-
-
-
+/* Lista */
 ul#jegyzetlista {
     list-style-type: none;
     max-width: 450px;
-    margin: 40px auto;
+    margin: 30px auto;
     padding: 0;
 }
 
 #jegyzetlista li {
     border: 1px solid #2d2d44;
-    border-radius: 30px;
+    border-radius: 6px;
     padding: 12px 16px;
     margin-bottom: 12px;
     background: #252547;
     display: flex;
     align-items: center;
     gap: 12px;
-    box-shadow: 0 2px 6px rgba(100, 0, 200, 0.4);
-    
+    box-shadow: 0 2px 6px rgba(100, 0, 200, 0.3);
 }
 
-
-
-
-
-
-
-
-input[type="checkbox"] {
-    appearance: none;          /* alap kinézet kikapcs */
-    -webkit-appearance: none;  /* Safari támogatás */
-    width: 22px;
-    height: 22px;
-    border: 2px solid #6a00f4; /* lila kör vonal */
-    border-radius: 50%;        /* kör alak */
-    background-color: #1e1e2f; /* sötét háttér */
-    cursor: pointer;
-    position: relative;
-    transition: background 0.2s, border-color 0.2s;
-}
-input[type="checkbox"]:hover
-{
-     transform: scale(1.7); 
-}
-input[type="checkbox"]:checked {
-    background-color: #6a00f4; /* lila háttér */
-    border-color: #6a00f4;
-}
-input[type="checkbox"]:checked::after {
-    content: "✔";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -58%);
-    font-size: 14px;
-    color: white;
+/* Csoportosítás */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
 }
 
+.logout-group {
+    margin-top: 30px;
+}
 
-
-
-
-
+/* Szöveg a listában */
 span {
-    font-size: 16px;
+    font-size: 15px;
     flex: 1;
-    color: #e5e5e5 !important; 
+    color: #e5e5e5 !important;
 }
-
 
 span.done {
     text-decoration: line-through;
-    color: #b9a6ff !important; 
+    color: #b9a6ff !important;
 }
 
-
+/* Szöveg kijelölése */
 ::selection {
     background: #9d4edd;
     color: #fff;
 }
 
+/* --- Mobil --- */
 @media (max-width: 500px) {
     #feladat {
-        width: 90%;
-        margin-bottom: 12px;
+        font-size: 18px;
     }
 
-    #bekuldes,
-    #delete,
-    #logout,
-    #selectAll {
-        width: 90%;
-        margin: 6px 0;
+    #bekuldes {
+        width: 100px;
+        height: 44px;
+        font-size: 15px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .button-group button {
+        width: 100%;
     }
 }
